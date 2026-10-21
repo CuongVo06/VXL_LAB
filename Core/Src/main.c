@@ -54,7 +54,47 @@ static void MX_GPIO_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+/* USER CODE BEGIN 0 */
 
+// Hàm Bài 7: Tắt toàn bộ 12 LED trên đồng hồ
+void clearAllClock(void) {
+    uint16_t clock_pins[] = {
+        GPIO_PIN_15, GPIO_PIN_4, GPIO_PIN_5, GPIO_PIN_6,
+        GPIO_PIN_7, GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_10,
+        GPIO_PIN_11, GPIO_PIN_12, GPIO_PIN_13, GPIO_PIN_14
+    };
+
+    for (int i = 0; i < 12; i++) {
+        HAL_GPIO_WritePin(GPIOA, clock_pins[i], GPIO_PIN_SET); // Mức cao để tắt (active-low)
+    }
+}
+
+// Hàm Bài 8: Bật LED tương ứng với số giờ từ 0 đến 11
+void setNumberOnClock(int num) {
+	uint16_t clock_pins[] = {
+	    GPIO_PIN_15, GPIO_PIN_4, GPIO_PIN_5, GPIO_PIN_6,
+	    GPIO_PIN_7, GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_10,
+	    GPIO_PIN_11, GPIO_PIN_12, GPIO_PIN_13, GPIO_PIN_14
+	};
+
+    if (num >= 0 && num < 12) {
+        HAL_GPIO_WritePin(GPIOA, clock_pins[num], GPIO_PIN_RESET); // Mức thấp để bật
+    }
+}
+
+// Hàm Bài 9: Tắt một LED cụ thể tương ứng với số giờ từ 0 đến 11
+void clearNumberOnClock(int num) {
+	uint16_t clock_pins[] = {
+	    GPIO_PIN_15, GPIO_PIN_4, GPIO_PIN_5, GPIO_PIN_6,
+	    GPIO_PIN_7, GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_10,
+	    GPIO_PIN_11, GPIO_PIN_12, GPIO_PIN_13, GPIO_PIN_14
+	};
+
+    // Kiểm tra tính hợp lệ của số giờ (từ 0 đến 11)
+    if (num >= 0 && num < 12) {
+        HAL_GPIO_WritePin(GPIOA, clock_pins[num], GPIO_PIN_SET); // Xuất mức cao (SET) để tắt LED
+    }
+}
 /* USER CODE END 0 */
 
 /**
@@ -90,23 +130,42 @@ int main(void)
   /* USER CODE END 2 */
 
   /* Infinite loop */
-  // Mảng chứa các chân từ PA4 đến PA15 tương ứng với 12 vị trí trên đồng hồ
-  uint16_t clock_pins[] = {
-      GPIO_PIN_4, GPIO_PIN_5, GPIO_PIN_6, GPIO_PIN_7,
-      GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_10, GPIO_PIN_11,
-      GPIO_PIN_12, GPIO_PIN_13, GPIO_PIN_14, GPIO_PIN_15
-  };
+  /* USER CODE BEGIN WHILE */
+  /* USER CODE BEGIN WHILE */
+    int h_pos = 0; // Hour hand position (0 - 11)
+    int m_pos = 0; // Minute hand position (0 - 11)
+    int s_pos = 0; // Second hand position (0 - 11)
 
-  while (1) {
-      for (int i = 0; i < 12; i++) {
-          // Bật LED tại vị trí i (vì dùng cực âm chung với nguồn nên xuất mức 0 - GPIO_PIN_RESET để sáng)
-          HAL_GPIO_WritePin(GPIOA, clock_pins[i], GPIO_PIN_RESET);
-          HAL_Delay(200); // Trễ 200ms cho mỗi LED
+    clearAllClock();
 
-          // Tắt LED tại vị trí i (xuất mức 1 - GPIO_PIN_SET để tắt)
-          HAL_GPIO_WritePin(GPIOA, clock_pins[i], GPIO_PIN_SET);
-      }
-  }
+    while (1)
+    {
+        // 1. Clear all LEDs before updating
+        clearAllClock();
+
+        // 2. Turn on the 3 LEDs for hour, minute, and second simultaneously
+        setNumberOnClock(h_pos);
+        setNumberOnClock(m_pos);
+        setNumberOnClock(s_pos);
+
+        // 3. Wait for 1 second
+        HAL_Delay(1000);
+
+        // 4. Update clock positions
+        s_pos++;
+        if (s_pos >= 12) {
+            s_pos = 0;
+            m_pos++;
+            if (m_pos >= 12) {
+                m_pos = 0;
+                h_pos = (h_pos + 1) % 12;
+            }
+        }
+
+      /* USER CODE END WHILE */
+
+      /* USER CODE BEGIN 3 */
+    }
 }
 
 /**
