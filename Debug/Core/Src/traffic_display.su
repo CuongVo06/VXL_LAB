@@ -1,0 +1,7 @@
+traffic_display.c:16:6:set_traffic_leds	24	static
+traffic_display.c:26:6:blink_red_leds	32	static
+traffic_display.c:31:6:blink_yellow_leds	32	static
+traffic_display.c:36:6:blink_green_leds	32	static
+traffic_display.c:42:6:display_7seg_group1	24	static
+traffic_display.c:51:6:display_7seg_group2	24	static
+traffic_display.c:61:6:scan_7seg	32	static
