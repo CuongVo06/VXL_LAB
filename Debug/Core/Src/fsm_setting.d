@@ -1,6 +1,6 @@
 Core/Src/fsm_setting.o: ../Core/Src/fsm_setting.c \
- ../Core/Inc/fsm_setting.h ../Core/Inc/global.h ../Core/Inc/button.h \
- ../Core/Inc/main.h ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
+ ../Core/Inc/fsm_setting.h ../Core/Inc/global.h ../Core/Inc/main.h \
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
  ../Core/Inc/stm32f1xx_hal_conf.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h \
@@ -24,13 +24,12 @@ Core/Src/fsm_setting.o: ../Core/Src/fsm_setting.c \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
- ../Core/Inc/software_timer.h ../Core/Inc/traffic_display.h
+ ../Core/Inc/button.h ../Core/Inc/software_timer.h \
+ ../Core/Inc/traffic_display.h
 
 ../Core/Inc/fsm_setting.h:
 
 ../Core/Inc/global.h:
-
-../Core/Inc/button.h:
 
 ../Core/Inc/main.h:
 
@@ -81,6 +80,8 @@ Core/Src/fsm_setting.o: ../Core/Src/fsm_setting.c \
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:
 
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h:
+
+../Core/Inc/button.h:
 
 ../Core/Inc/software_timer.h:
 

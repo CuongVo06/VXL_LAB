@@ -1,2 +1,7 @@
-fsm_automatic.c:7:6:fsm_automatic_init	8	static
-fsm_automatic.c:14:6:fsm_automatic_run	16	static
+fsm_automatic.c:5:6:decrease_counter	8	static
+fsm_automatic.c:15:6:set_led_red1_green2	16	static
+fsm_automatic.c:20:6:set_led_red1_yellow2	16	static
+fsm_automatic.c:25:6:set_led_green1_red2	16	static
+fsm_automatic.c:30:6:set_led_yellow1_red2	16	static
+fsm_automatic.c:35:6:fsm_automatic_init	4	static
+fsm_automatic.c:39:6:fsm_automatic_run	8	static

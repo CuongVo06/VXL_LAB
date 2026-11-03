@@ -79,8 +79,8 @@ int main(void) {
     HAL_TIM_Base_Start_IT(&htim2); // Kích hoạt ngắt TIM2
 
     fsm_automatic_init();
-    setTimer2(250);
-    setTimer3(20);
+    setTimer(1, 250); // Timer index 1 for 2Hz blinking
+    setTimer(2, 20);  // Timer index 2 for 7-segment scanning
     /* USER CODE END 2 */
 
     while (1) {

@@ -3,19 +3,23 @@
 static int toggle_flag = 0;
 
 void fsm_setting_run(void) {
+    // Guard Clause: Thoát nếu đang ở Mode Auto
     if (current_mode == MODE_AUTO) return;
 
-    if (timer2_flag == 1) {
-        setTimer2(250);
+    // Timer index 1: Nháy LED 2Hz (250ms)
+    if (timer_flag[1] == 1) {
+        setTimer(1, 250);
         toggle_flag = !toggle_flag;
     }
 
-    if (is_button_pressed(1)) { // Nút 2 (PB10): Tăng thời gian
+    // Nút 2: Tăng thời gian tạm thời
+    if (is_button_pressed(1)) {
         temp_time++;
         if (temp_time > 99) temp_time = 1;
     }
 
-    if (is_button_pressed(2)) { // Nút 3 (PB11): Xác nhận
+    // Nút 3: Lưu thời gian chính thức
+    if (is_button_pressed(2)) {
         switch (current_mode) {
             case MODE_SET_RED:
                 red_time = temp_time;
@@ -31,6 +35,7 @@ void fsm_setting_run(void) {
         }
     }
 
+    // Nháy LED tương ứng Mode
     switch (current_mode) {
         case MODE_SET_RED:
             blink_red_leds(toggle_flag);
@@ -45,8 +50,9 @@ void fsm_setting_run(void) {
             break;
     }
 
-    if (timer3_flag == 1) {
-        setTimer3(20); // Thay vì 10
+    // Quét LED 7 đoạn
+    if (timer_flag[2] == 1) {
+        setTimer(2, 20);
         scan_7seg(current_mode, temp_time);
     }
 }
